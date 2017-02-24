@@ -105,3 +105,13 @@ Step4. ./gradlew clean all  (修改runtime文件)
 Step 5.
 File->Invalidate Caches->Invalidate and Restart
 
+
+
+
+Git
+
+git config --global user.email alex.p.zhang@emc.com
+git config --global user.name "zhanga33"
+git config --global http.sslVerify false
+git clone https://asdstash.isus.emc.com/scm/vs/storage.git
+
