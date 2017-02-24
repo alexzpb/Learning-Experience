@@ -42,4 +42,66 @@ index f090e1b..54bf800 100755
 diff --git a/tools/cli/python/vm_deployment.cfg b/tools/cli/python/vm_deployment.cfg
 index 00f25e8..eb5c034 100644
 
-Step3.make clean clobber rpm && tools/webstorage/deployment.sh SetupViprNodes 
+Step3.
+make clean clobber rpm && tools/webstorage/deployment.sh SetupViprNodes 
+
+
+Windows IDE Setup
+Step1. 
+拷贝软件 \\cigdogfood.lss.emc.com\share\CIG Users\Zhu Xiong
+设置环境变量
+JAVA_HOME:C:\Program Files\Java\jdk1.8.0_77
+PATH:C:\Program Files\Git\git-bash.exe;C:\Program Files\Java\jdk1.8.0_77
+
+Step2. 
+替换文件  C:\Program Files (x86)\JetBrains\IntelliJ IDEA Community Edition 2016.1.1\bin/idea.properties
+
+Step3. 
+./gradlew idea
+
+Step4. ./gradlew clean all  (修改runtime文件)
+    C:\Users\zhux10\Vipr\storage\runtime\build.gradle
+
+    dependencies {
+    compile project(":datasvc-vipr-client"),
+            project(":blobsvc"),
+            project(":coordinatorsvc"),
+            project(":apisvc"),
+            project(":authsvc"),
+            project(":zkutils"),
+            project(":controllersvc"),
+            project(":provisionsvc"),
+            project(":vnest"),
+            project(":eventsvc"),
+            project(":resourcesvc"),
+            project(":objcontrolsvc"),
+            project(":blobsvc"),
+            project(":transformsvc"),
+            project(":metering"),
+            project(":devicescanner"),
+            project(":ownership"),
+            project(":shared"),
+            project(":common"),
+            project(":directoryserver"),
+            project(":directoryclient"),
+            project(":rm"),
+            project(":cm"),
+            project(":ssm"),
+            project(":georeceiver"),
+            project(":dtquery"),
+            project(":stat"),
+            project(":cashead"),
+            project(":filesvc"),
+            project(":dataheadsvc"),
+            project(":statclient"),
+            project(":stat"),
+            library(junit),
+            library(mockito)
+
+    if (!project.hasProperty('noDataServices')) {
+        compile
+    }
+
+Step 5.
+File->Invalidate Caches->Invalidate and Restart
+
