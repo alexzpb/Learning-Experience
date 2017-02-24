@@ -1,0 +1,45 @@
+vsphere的登录：
+    lglag150.corp.emc.com
+    auto-vipr-dataserv
+    Aut0D3pl0yV!PR
+	
+配置devkit:
+Step1.
+clone someones devkit, and change the ip as which choose in #1	
+	
+
+配置datanode：
+Step1.
+	modify the ~/deployment.sh
+
+    export Deploy64GBMemoryVM=true
+    export DataNodes='(10.247.101.81 10.247.101.82)'
+    export VsphereFolder=zhanga33_
+    export DataStore=VNX-4092_F141_LUN-7
+    export DevBranch=/workspace/storage/
+    export QeBranch=/workspace/shared-webstorage-qe
+
+    export BOURNE_IPADDR=10.247.101.81
+    export BOURNE_DATA_IPADDR=10.247.101.81
+    export BOURNE_DEBUG=0
+    export MUST_HAVE_ENOUGH_RESOURCES=false
+
+Step2.
+修改文件/workspace/storage/tools/cli/python/robot
+diff --git a/tools/cli/python/robot b/tools/cli/python/robot
+index f090e1b..54bf800 100755
+--- a/tools/cli/python/robot
++++ b/tools/cli/python/robot
+@@ -106,7 +106,7 @@ run_provision() {
+     check_boto3_installed
+     rm -rf report
+
+-    pybot -b provision.log --outputdir report --variable IP:${BOURNE_DATA_IPADDR} \
++    pybot -P ./ -b provision.log --outputdir report --variable IP:${BOURNE_DATA_IPADDR} \
+         --variable MGMT_IP:${BOURNE_IPADDR} \
+         --variable GEO_IP:${BOURNE_GEO_IPADDR} \
+         --variable DEPLOYMENT_OUTPUT:${DEPLOYMENT_OUTPUT} ${encryption_args} provision.robot
+diff --git a/tools/cli/python/vm_deployment.cfg b/tools/cli/python/vm_deployment.cfg
+index 00f25e8..eb5c034 100644
+
+Step3.make clean clobber rpm && tools/webstorage/deployment.sh SetupViprNodes 
